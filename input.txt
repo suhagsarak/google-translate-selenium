@@ -1,0 +1,17 @@
+
+<trans-unit id="crm-ui-recruiting-calendars" datatype="html"><source> Recruiting Calendars </source></trans-unit>
+
+<trans-unit id="crm-ui-holiday-calendars" datatype="html"><source> Holiday Calendars </source></trans-unit>
+
+<trans-unit id="crm-ui-holiday-calendars1" datatype="html"><source> Holiday Calendars 1</source></trans-unit>
+
+<trans-unit id="crm-ui-holiday-calendars2" datatype="html"><source> Holiday Calendars 2</source></trans-unit>
+
+<trans-unit id="crm-ui-holiday-calendars3" datatype="html"><source> Holiday Calendars 3</source></trans-unit>
+
+<trans-unit id="crm-ui-holiday-calendars4" datatype="html"><source> Holiday Calendars 4</source></trans-unit>
+
+<trans-unit id="crm-ui-holiday-calendars5" datatype="html"><source> Holiday Calendars 5</source></trans-unit>
+
+<trans-unit id="crm-ui-holiday-calendars6" datatype="html"><source> Holiday Calendars 6</source></trans-unit>
+
