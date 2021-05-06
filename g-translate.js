@@ -22,9 +22,8 @@ exports.translate = (elementsToTranslate, textType) => {
 
     switch (textType) {
         case 1:
-            outfile = './output.txt'
-            break;
         case 2:
+        case 4:
             outfile = './output.txt'
             break;
         case 3:
@@ -82,6 +81,18 @@ exports.translate = (elementsToTranslate, textType) => {
                             <source>${source.source}</source>
                             <target>${target}</target>
                         </trans-unit>`);
+                        break;
+
+                    case 4:
+                        source = elementsToTranslate[ind];
+                        await inputForEnglish.clear();
+                        await inputForEnglish.sendKeys(source.message);
+                        e = new Date().getTime() + (10 * 1000);
+                        while (new Date().getTime() <= e) { }
+                        outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                        target = await outputForTranslation.getText()
+                        writePlain(`
+                            "${source.literalId}": "${target}",`);
                         break;
                 }
             }
