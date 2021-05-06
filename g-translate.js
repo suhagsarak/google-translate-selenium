@@ -7,7 +7,7 @@ exports.translate = (elementsToTranslate, textType) => {
 
     const inLan = [{ name: 'English', locale: 'en' }];
 
-    const outLan = [
+    let outLan = [
         { name: 'German', locale: 'de' },
         { name: 'Spanish', locale: 'es' },
         { name: 'French', locale: 'fr' },
@@ -23,11 +23,22 @@ exports.translate = (elementsToTranslate, textType) => {
     switch (textType) {
         case 1:
         case 2:
-        case 4:
             outfile = './output.txt'
             break;
         case 3:
             outfile = './output.html'
+            break;
+        case 4:
+            outLan = [
+                { name: 'English', locale: 'en' },
+                { name: 'French', locale: 'fr' },
+                { name: 'German', locale: 'de' },
+                { name: 'Polish', locale: 'pl' },
+                { name: 'Dutch', locale: 'nl' },
+                { name: 'Swedish', locale: 'sv' },
+                { name: 'Spanish', locale: 'es' },
+            ];
+            outfile = './output.txt'
             break;
     }
 
@@ -91,8 +102,7 @@ exports.translate = (elementsToTranslate, textType) => {
                         while (new Date().getTime() <= e) { }
                         outputForTranslation = await driver.findElement(By.xpath(outXpath));
                         target = await outputForTranslation.getText()
-                        writePlain(`
-                            "${source.literalId}": "${target}",`);
+                        writePlain(`"${source.literalId}": "${target}",\n`);
                         break;
                 }
             }
