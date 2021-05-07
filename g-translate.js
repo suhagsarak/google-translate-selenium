@@ -30,7 +30,6 @@ exports.translate = (elementsToTranslate, textType) => {
             break;
         case 4:
             outLan = [
-                { name: 'English', locale: 'en' },
                 { name: 'French', locale: 'fr' },
                 { name: 'German', locale: 'de' },
                 { name: 'Polish', locale: 'pl' },
@@ -47,9 +46,9 @@ exports.translate = (elementsToTranslate, textType) => {
     async function callAPI() {
         for (let lanNo = 0; lanNo < outLan.length; lanNo++) {
             outLang = outLan[lanNo];
-            fs.appendFile(outfile, `\n<!-- ${outLang.name}-${outLang.locale} -->\n`, { 'flag': 'a' }, function (err) {
-                if (err) { return console.error(err); }
-            });
+
+            write(`\n<!-- ${outLang.name}-${outLang.locale} -->\n`, outfile);
+
             url = `https://translate.google.co.in/?sl=${inLan[0].locale}&tl=${outLang.locale}&op=translate`
             await driver.get(url);
             inputForEnglish = await driver.findElement(By.className('er8xn'));
@@ -107,9 +106,15 @@ exports.translate = (elementsToTranslate, textType) => {
                 }
             }
         }
-        fs.appendFile(outfile, '\n', { 'flag': 'a' }, function (err) {
-            if (err) { return console.error(err); }
-        });
+        
+        write(`\n`, outfile);
+
+        if (textType === 4) {
+            writePlain(`\n<!-- English-en -->\n`);
+            for (let ind = 0; ind < elementsToTranslate.length; ind++) {
+                writePlain(`"${elementsToTranslate[ind].literalId}": "${elementsToTranslate[ind].message}",\n`);
+            }
+        }
     }
 
     callAPI()
@@ -123,6 +128,12 @@ function writePlain(text, file = './output.txt') {
 }
 
 function writeHtml(text, file = './output.html') {
+    fs.appendFile(file, text, { 'flag': 'a' }, function (err) {
+        if (err) { return console.error(err); }
+    });
+}
+
+function write(text, file) {
     fs.appendFile(file, text, { 'flag': 'a' }, function (err) {
         if (err) { return console.error(err); }
     });
