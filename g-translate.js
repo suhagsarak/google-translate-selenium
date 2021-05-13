@@ -54,7 +54,9 @@ exports.translate = (elementsToTranslate, textType) => {
             inputForEnglish = await driver.findElement(By.className('er8xn'));
 
             for (let ind = 0; ind < elementsToTranslate.length; ind++) {
-
+                // if (outputForTranslation) {
+                //     await outputForTranslation.clear();
+                // }
                 switch (textType) {
                     case 1:
                         source = elementsToTranslate[ind];
@@ -69,13 +71,17 @@ exports.translate = (elementsToTranslate, textType) => {
 
                     case 2:
                         source = elementsToTranslate[ind];
-                        await inputForEnglish.clear();
-                        await inputForEnglish.sendKeys(source);
-                        e = new Date().getTime() + (10 * 1000);
-                        while (new Date().getTime() <= e) { }
-                        outputForTranslation = await driver.findElement(By.xpath(outXpath));
-                        target = await outputForTranslation.getText()
-                        writePlain(`${source} {${target}}, `);
+                        if (source === '--------------') {
+                            writePlain('\n');
+                        } else {
+                            await inputForEnglish.clear();
+                            await inputForEnglish.sendKeys(source);
+                            e = new Date().getTime() + (10 * 1000);
+                            while (new Date().getTime() <= e) { }
+                            outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                            target = await outputForTranslation.getText()
+                            writePlain(`${source} {${target}}, `);
+                        }
                         break;
 
                     case 3:
@@ -106,7 +112,7 @@ exports.translate = (elementsToTranslate, textType) => {
                 }
             }
         }
-        
+
         write(`\n`, outfile);
 
         if (textType === 4) {
