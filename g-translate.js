@@ -17,6 +17,7 @@ exports.translate = (elementsToTranslate, textType) => {
     ];
 
     outXpath = '/html/body/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div/div[1]/span[1]/span/span';
+    genderSpecificXpath = '//*[@id="yDmH0d"]/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div[5]/div[2]/div[1]/span[1]';
 
     let url, outLang, inputForEnglish, outputForTranslation, source, target, outfile, e;
 
@@ -54,9 +55,6 @@ exports.translate = (elementsToTranslate, textType) => {
             inputForEnglish = await driver.findElement(By.className('er8xn'));
 
             for (let ind = 0; ind < elementsToTranslate.length; ind++) {
-                // if (outputForTranslation) {
-                //     await outputForTranslation.clear();
-                // }
                 switch (textType) {
                     case 1:
                         source = elementsToTranslate[ind];
@@ -64,23 +62,31 @@ exports.translate = (elementsToTranslate, textType) => {
                         await inputForEnglish.sendKeys(source);
                         e = new Date().getTime() + (10 * 1000);
                         while (new Date().getTime() <= e) { }
+                        outputForTranslation = null;
                         outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                        if (!outputForTranslation) {
+                            outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                        }
                         target = await outputForTranslation.getText()
                         writePlain(`${source}\n${target}\n`);
                         break;
 
                     case 2:
                         source = elementsToTranslate[ind];
-                        if (source === '--------------') {
+                        if (source === '--') {
                             writePlain('\n');
                         } else {
                             await inputForEnglish.clear();
                             await inputForEnglish.sendKeys(source);
                             e = new Date().getTime() + (10 * 1000);
                             while (new Date().getTime() <= e) { }
+                            outputForTranslation = null;
                             outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                            if (!outputForTranslation) {
+                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                            }
                             target = await outputForTranslation.getText()
-                            writePlain(`${source} {${target}}, `);
+                            writePlain(`${source} {${target}} `);
                         }
                         break;
 
@@ -90,7 +96,11 @@ exports.translate = (elementsToTranslate, textType) => {
                         await inputForEnglish.sendKeys(source.source);
                         e = new Date().getTime() + (10 * 1000);
                         while (new Date().getTime() <= e) { }
+                        outputForTranslation = null;
                         outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                        if (!outputForTranslation) {
+                            outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                        }
                         target = await outputForTranslation.getText()
                         writeHtml(`
                         <trans-unit id="${source.id}" datatype="html">
@@ -105,7 +115,11 @@ exports.translate = (elementsToTranslate, textType) => {
                         await inputForEnglish.sendKeys(source.message);
                         e = new Date().getTime() + (10 * 1000);
                         while (new Date().getTime() <= e) { }
+                        outputForTranslation = null;
                         outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                        if (!outputForTranslation) {
+                            outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                        }
                         target = await outputForTranslation.getText()
                         writePlain(`"${source.literalId}": "${target}",\n`);
                         break;
