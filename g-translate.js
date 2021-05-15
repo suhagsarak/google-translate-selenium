@@ -112,10 +112,10 @@ exports.translate = (elementsToTranslate, textType) => {
                         }
                         target = await outputForTranslation.getText()
                         writeHtml(`
-                        <trans-unit id="${source.id}" datatype="html">
-                            <source>${source.source}</source>
-                            <target>${target}</target>
-                        </trans-unit>`);
+      <trans-unit id="${source.id}" datatype="html">
+      <source>${source.source}</source>
+      <target>${target}</target>
+      </trans-unit>`);
                         break;
 
                     case 4:
@@ -138,7 +138,7 @@ exports.translate = (elementsToTranslate, textType) => {
                 }
             }
         }
-
+        await driver.close();
         write(`\n`, outfile);
 
         if (textType === 4) {
