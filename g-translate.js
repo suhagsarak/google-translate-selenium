@@ -63,9 +63,12 @@ exports.translate = (elementsToTranslate, textType) => {
                         e = new Date().getTime() + (10 * 1000);
                         while (new Date().getTime() <= e) { }
                         outputForTranslation = null;
-                        outputForTranslation = await driver.findElement(By.xpath(outXpath));
-                        if (!outputForTranslation) {
-                            outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                        try {
+                            outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                        }
+                        catch {
+                            if (!outputForTranslation)
+                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
                         writePlain(`${source}\n${target}\n`);
@@ -81,9 +84,12 @@ exports.translate = (elementsToTranslate, textType) => {
                             e = new Date().getTime() + (10 * 1000);
                             while (new Date().getTime() <= e) { }
                             outputForTranslation = null;
-                            outputForTranslation = await driver.findElement(By.xpath(outXpath));
-                            if (!outputForTranslation) {
-                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                            try {
+                                outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                            }
+                            catch {
+                                if (!outputForTranslation)
+                                    outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                             }
                             target = await outputForTranslation.getText()
                             writePlain(`${source} {${target}} `);
@@ -97,9 +103,12 @@ exports.translate = (elementsToTranslate, textType) => {
                         e = new Date().getTime() + (10 * 1000);
                         while (new Date().getTime() <= e) { }
                         outputForTranslation = null;
-                        outputForTranslation = await driver.findElement(By.xpath(outXpath));
-                        if (!outputForTranslation) {
-                            outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                        try {
+                            outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                        }
+                        catch {
+                            if (!outputForTranslation)
+                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
                         writeHtml(`
@@ -116,9 +125,12 @@ exports.translate = (elementsToTranslate, textType) => {
                         e = new Date().getTime() + (10 * 1000);
                         while (new Date().getTime() <= e) { }
                         outputForTranslation = null;
-                        outputForTranslation = await driver.findElement(By.xpath(outXpath));
-                        if (!outputForTranslation) {
-                            outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                        try {
+                            outputForTranslation = await driver.findElement(By.xpath(outXpath));
+                        }
+                        catch {
+                            if (!outputForTranslation)
+                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
                         writePlain(`"${source.literalId}": "${target}",\n`);
