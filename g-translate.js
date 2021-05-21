@@ -111,11 +111,12 @@ exports.translate = (elementsToTranslate, textType) => {
                                 outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
-                        writeHtml(`
-      <trans-unit id="${source.id}" datatype="html">
-      <source>${source.source}</source>
-      <target>${target}</target>
-      </trans-unit>`);
+                        writeHtml(
+                            '    <trans-unit id="${source.id}" datatype="html">\n' +
+                            '      <source>${source.source}</source>\n' +
+                            '      <target>${target}</target>\n' +
+                            '    </trans-unit>\n'
+                        );
                         break;
 
                     case 4:
@@ -133,7 +134,7 @@ exports.translate = (elementsToTranslate, textType) => {
                                 outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
-                        writePlain(`"${source.literalId}": "${target}",\n`);
+                        writePlain(`"${source.literalId}": "${target}", \n`);
                         break;
                 }
             }
@@ -142,9 +143,9 @@ exports.translate = (elementsToTranslate, textType) => {
         write(`\n`, outfile);
 
         if (textType === 4) {
-            writePlain(`\n<!-- English-en -->\n`);
+            writePlain(`\n < !--English - en-- >\n`);
             for (let ind = 0; ind < elementsToTranslate.length; ind++) {
-                writePlain(`"${elementsToTranslate[ind].literalId}": "${elementsToTranslate[ind].message}",\n`);
+                writePlain(`"${elementsToTranslate[ind].literalId}": "${elementsToTranslate[ind].message}", \n`);
             }
         }
     }
