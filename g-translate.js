@@ -112,9 +112,9 @@ exports.translate = (elementsToTranslate, textType) => {
                         }
                         target = await outputForTranslation.getText()
                         writeHtml(
-                            '    <trans-unit id="${source.id}" datatype="html">\n' +
-                            '      <source>${source.source}</source>\n' +
-                            '      <target>${target}</target>\n' +
+                            '    <trans-unit id="' + source.id + '" datatype="html">\n' +
+                            '      <source>' + source.source + '</source>\n' +
+                            '      <target>' + target + '</target>\n' +
                             '    </trans-unit>\n'
                         );
                         break;
