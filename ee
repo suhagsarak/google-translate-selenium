@@ -1,0 +1,12 @@
+
+<target>{VAR_SELECT, select,
+ other {<x id="INTERPOLATION"/>}}</target>
+
+
+exports.literals = [
+    // //  Example
+    // {
+    //     literalId: "crm-interview-scheduling-please-remove-random-tokens",
+    //     message: "Please remove random tokens"
+    // }
+];
