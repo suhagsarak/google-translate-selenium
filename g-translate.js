@@ -134,7 +134,7 @@ exports.translate = (elementsToTranslate, textType) => {
                                 outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
-                        writePlain(`    "${source.literalId}": "${target}", \n`);
+                        writePlain(`    "${source.literalId}": "${target}",\n`);
                         break;
                 }
             }
@@ -145,7 +145,7 @@ exports.translate = (elementsToTranslate, textType) => {
         if (textType === 4) {
             writePlain(`\n < !--English - en-- >\n`);
             for (let ind = 0; ind < elementsToTranslate.length; ind++) {
-                writePlain(`    "${elementsToTranslate[ind].literalId}": "${elementsToTranslate[ind].message}", \n`);
+                writePlain(`    "${elementsToTranslate[ind].literalId}": "${elementsToTranslate[ind].message}",\n`);
             }
         }
     }
