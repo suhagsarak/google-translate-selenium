@@ -4,7 +4,12 @@
   "description": "",
   "main": "stringToTranslate.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node translate.js 3",
+    "simple": "node translate.js 1",
+    "dd": "node translate.js 2",
+    "html": "node translate.js 3",
+    "json": "node translate.js 4"
   },
   "repository": {
     "type": "git",
