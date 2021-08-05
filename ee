@@ -1,8 +1,16 @@
+2. For dropdown
+
+Hiring Manager
+Interviewer
+--
+Load Balance
+Priority
+--
 
 <target>{VAR_SELECT, select,
  other {<x id="INTERPOLATION"/>}}</target>
 
-
+4. for JSON
 exports.literals = [
     // //  Example
     // {

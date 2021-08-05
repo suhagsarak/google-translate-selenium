@@ -11,12 +11,12 @@ let data, stringToTranslate;
 try {
     switch (textType) {
         case '1':
-            data = fs.readFileSync('input.txt', 'utf8');
+            data = fs.readFileSync('inputtext.html', 'utf8');
             stringToTranslate = data.toString();
             translate(stringToTranslate.split('\n'), 1);
             break;
         case '2':
-            data = fs.readFileSync('input.txt', 'utf8');
+            data = fs.readFileSync('inputtext.html', 'utf8');
             stringToTranslate = data.toString();
             translate(stringToTranslate.split('\n'), 2);
             break;
