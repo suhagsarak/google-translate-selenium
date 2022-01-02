@@ -1,7 +1,7 @@
 
 const { translate } = require('./g-translate');
 const { extractSource } = require('./extractTags')
-const { literals } = require('../input/input.js')
+const { literals } = require('input.js')
 
 const fs = require('fs');
 
@@ -11,17 +11,17 @@ let data, stringToTranslate;
 try {
     switch (textType) {
         case '1':
-            data = fs.readFileSync('../input/inputtext.html', 'utf8');
+            data = fs.readFileSync('inputtext.html', 'utf8');
             stringToTranslate = data.toString();
             translate(stringToTranslate.split('\n'), 1);
             break;
         case '2':
-            data = fs.readFileSync('../input/inputtext.html', 'utf8');
+            data = fs.readFileSync('inputtext.html', 'utf8');
             stringToTranslate = data.toString();
             translate(stringToTranslate.split('\n'), 2);
             break;
         case '3':
-            data = fs.readFileSync('../input/input.html', 'utf8');
+            data = fs.readFileSync('input.html', 'utf8');
             stringToTranslate = data.toString();
             const elementsToTranslate = extractSource(stringToTranslate);
             translate(elementsToTranslate, 3);
