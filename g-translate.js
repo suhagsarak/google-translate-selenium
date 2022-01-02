@@ -24,10 +24,10 @@ exports.translate = (elementsToTranslate, textType) => {
     switch (textType) {
         case 1:
         case 2:
-            outfile = '../output/output.txt'
+            outfile = 'output.txt'
             break;
         case 3:
-            outfile = '../output/output.html'
+            outfile = 'output.html'
             break;
         case 4:
             outLan = [
@@ -38,7 +38,7 @@ exports.translate = (elementsToTranslate, textType) => {
                 { name: 'Swedish', locale: 'sv' },
                 { name: 'Spanish', locale: 'es' },
             ];
-            outfile = '../output/output.txt'
+            outfile = 'output.txt'
             break;
     }
 
@@ -154,13 +154,13 @@ exports.translate = (elementsToTranslate, textType) => {
 }
 
 
-function writePlain(text, file = '../output/output.txt') {
+function writePlain(text, file = 'output.txt') {
     fs.appendFile(file, text, { 'flag': 'a' }, function (err) {
         if (err) { return console.error(err); }
     });
 }
 
-function writeHtml(text, file = '../output/output.html') {
+function writeHtml(text, file = 'output.html') {
     fs.appendFile(file, text, { 'flag': 'a' }, function (err) {
         if (err) { return console.error(err); }
     });
