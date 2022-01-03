@@ -1,7 +1,7 @@
 
 const { translate } = require('./g-translate');
 const { extractSource } = require('./extractTags')
-const { literals } = require('input.js')
+const { literals } = require('./input.js')
 
 const fs = require('fs');
 
