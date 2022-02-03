@@ -15,18 +15,18 @@ try {
         case '1':
             data = fs.readFileSync('inputtext.html', 'utf8');
             stringToTranslate = data.toString();
-            translate(stringToTranslate.split('\n'), 1);
+            translate(stringToTranslate.split('\n'), 1, liveLink);
             break;
         case '2':
             data = fs.readFileSync('inputtext.html', 'utf8');
             stringToTranslate = data.toString();
-            translate(stringToTranslate.split('\n'), 2);
+            translate(stringToTranslate.split('\n'), 2, liveLink);
             break;
         case '3':
             data = fs.readFileSync('input.html', 'utf8');
             stringToTranslate = data.toString();
             const elementsToTranslate = extractSource(stringToTranslate);
-            translate(elementsToTranslate, 3);
+            translate(elementsToTranslate, 3, liveLink);
             break;
         case '4':
             // literals = []

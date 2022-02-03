@@ -38,15 +38,16 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                 { name: 'Swedish', locale: 'sv' },
                 { name: 'Spanish', locale: 'es' },
             ];
-            if (liveLink == 'll') {
-                outLan = [
-                    { name: 'Spanish', locale: 'es' },
-                    { name: 'Polish', locale: 'pl' },
-                    { name: 'Portugese', locale: 'pt' },
-                ];
-            }
             outfile = 'output.txt'
             break;
+    }
+
+    if (liveLink == 'll') {
+        outLan = [
+            { name: 'Spanish', locale: 'es' },
+            { name: 'Polish', locale: 'pl' },
+            { name: 'Portugese', locale: 'pt' },
+        ];
     }
 
     const driver = new webdriver.Builder().forBrowser('chrome').build();
@@ -78,6 +79,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                                 outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
+                        // writePlain(`${source} ${target}\n`);
                         writePlain(`${source}\n${target}\n`);
                         break;
 
