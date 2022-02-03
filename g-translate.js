@@ -139,6 +139,7 @@ exports.translate = (elementsToTranslate, textType) => {
                                 outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
+                        // target = `${target}`.replace(/ /g,'')
                         writePlain(`    "${source.literalId}": "${target}",\n`);
                         break;
                 }

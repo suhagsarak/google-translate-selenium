@@ -27,6 +27,13 @@ try {
             translate(elementsToTranslate, 3);
             break;
         case '4':
+            // literals = []
+            // for (let key of Object.keys(tim)) {
+            //     literals.push({
+            //         message: tim[key].label,
+            //         literalId: 'timezone-' + tim[key].label.toLowerCase().replace('/', '-')
+            //     })
+            // }
             translate(literals, 4);
             break;
     }
