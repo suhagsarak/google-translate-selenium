@@ -30,11 +30,6 @@ exports.translate = (elementsToTranslate, textType) => {
             outfile = 'output.html'
             break;
         case 4:
-            // outLan = [
-            //     { name: 'Spanish', locale: 'es' },
-            //     { name: 'Polish', locale: 'pl' },
-            //     { name: 'Portugese', locale: 'pt' },
-            // ];
             outLan = [
                 { name: 'French', locale: 'fr' },
                 { name: 'German', locale: 'de' },
@@ -43,6 +38,11 @@ exports.translate = (elementsToTranslate, textType) => {
                 { name: 'Swedish', locale: 'sv' },
                 { name: 'Spanish', locale: 'es' },
             ];
+            // outLan = [
+            //     { name: 'Spanish', locale: 'es' },
+            //     { name: 'Polish', locale: 'pl' },
+            //     { name: 'Portugese', locale: 'pt' },
+            // ];
             outfile = 'output.txt'
             break;
     }
