@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-exports.translate = (elementsToTranslate, textType) => {
+exports.translate = (elementsToTranslate, textType, liveLink = '') => {
 
     const webdriver = require('selenium-webdriver')
     const By = webdriver.By
@@ -38,11 +38,13 @@ exports.translate = (elementsToTranslate, textType) => {
                 { name: 'Swedish', locale: 'sv' },
                 { name: 'Spanish', locale: 'es' },
             ];
-            // outLan = [
-            //     { name: 'Spanish', locale: 'es' },
-            //     { name: 'Polish', locale: 'pl' },
-            //     { name: 'Portugese', locale: 'pt' },
-            // ];
+            if (liveLink == 'll') {
+                outLan = [
+                    { name: 'Spanish', locale: 'es' },
+                    { name: 'Polish', locale: 'pl' },
+                    { name: 'Portugese', locale: 'pt' },
+                ];
+            }
             outfile = 'output.txt'
             break;
     }

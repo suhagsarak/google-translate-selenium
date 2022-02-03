@@ -6,6 +6,8 @@ const { literals } = require('./input.js')
 const fs = require('fs');
 
 textType = process.argv[2];
+liveLink = process.argv[3];
+
 let data, stringToTranslate;
 // 1.Text 2.Dropdown 3.Tag 4.JSON
 try {
@@ -34,7 +36,7 @@ try {
             //         literalId: 'timezone-' + tim[key].label.toLowerCase().replace('/', '-')
             //     })
             // }
-            translate(literals, 4);
+            translate(literals, 4, liveLink);
             break;
     }
 } catch (e) {
