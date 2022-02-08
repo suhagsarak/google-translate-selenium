@@ -8,7 +8,6 @@
     "dd": "node translate.js 2",
     "html": "node translate.js 3",
     "json": "node translate.js 4",
-
     "simplell": "node translate.js 1 ll",
     "jsonll": "node translate.js 4 ll"
   },
