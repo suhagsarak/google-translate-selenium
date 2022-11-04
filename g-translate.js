@@ -16,7 +16,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
         { name: 'Swedish', locale: 'sv' },
     ];
 
-    outXpath = '//*[@id="yDmH0d"]/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div[8]/div/div[1]/span[1]/span/span'
+    outXpath = '//*[@id="yDmH0d"]/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div/div[8]/div/div[1]/span[1]/span/span'
     gSpecificXpath = '//*[@id="yDmH0d"]/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div[6]/div[1]/div[1]/span[1]';
 
     let url, inputForEnglish, outputForTranslation, source, target, outfile, e;
