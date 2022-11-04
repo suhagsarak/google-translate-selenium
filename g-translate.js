@@ -17,9 +17,9 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
     ];
 
     outXpath = '//*[@id="yDmH0d"]/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div[8]/div/div[1]/span[1]/span/span'
-    genderSpecificXpath = '//*[@id="yDmH0d"]/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div[6]/div[1]/div[1]/span[1]';
+    gSpecificXpath = '//*[@id="yDmH0d"]/c-wiz/div/div[2]/c-wiz/div[2]/c-wiz/div[1]/div[2]/div[3]/c-wiz[2]/div[6]/div[1]/div[1]/span[1]';
 
-    let url, outLang, inputForEnglish, outputForTranslation, source, target, outfile, e;
+    let url, inputForEnglish, outputForTranslation, source, target, outfile, e;
 
     switch (textType) {
         case 1:
@@ -61,8 +61,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
     const driver = new webdriver.Builder().forBrowser('chrome').build();
 
     async function callAPI() {
-        for (let lanNo = 0; lanNo < outLan.length; lanNo++) {
-            outLang = outLan[lanNo];
+        for (let outLang of outLan) {
 
             write(`\n<!-- ${outLang.name}-${outLang.locale} -->\n`, outfile);
 
@@ -70,10 +69,10 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
             await driver.get(url);
             inputForEnglish = await driver.findElement(By.className('er8xn'));
 
-            for (let ind = 0; ind < elementsToTranslate.length; ind++) {
+            for (let eleToTrans of elementsToTranslate) {
                 switch (textType) {
                     case 1:
-                        source = elementsToTranslate[ind];
+                        source = eleToTrans;
                         await inputForEnglish.clear();
                         await inputForEnglish.sendKeys(source);
                         e = new Date().getTime() + (10 * 1000);
@@ -84,7 +83,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                         }
                         catch {
                             if (!outputForTranslation)
-                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                                outputForTranslation = await driver.findElement(By.xpath(gSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
                         // writePlain(`${source} ${target}\n`);
@@ -92,7 +91,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                         break;
 
                     case 2:
-                        source = elementsToTranslate[ind];
+                        source = eleToTrans;
                         if (source === '--') {
                             writePlain('\n');
                         } else {
@@ -106,7 +105,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                             }
                             catch {
                                 if (!outputForTranslation)
-                                    outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                                    outputForTranslation = await driver.findElement(By.xpath(gSpecificXpath));
                             }
                             target = await outputForTranslation.getText()
                             writePlain(`${source} {${target}} `);
@@ -114,18 +113,18 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                         break;
 
                     case 3:
-                        source = elementsToTranslate[ind];
+                        source = eleToTrans;
                         await inputForEnglish.clear();
                         await inputForEnglish.sendKeys(source.source);
                         e = new Date().getTime() + (10 * 1000);
-                        while (new Date().getTime() <= e) { }
+                        while (new Date().getTime() <= e) {}
                         outputForTranslation = null;
                         try {
                             outputForTranslation = await driver.findElement(By.xpath(outXpath));
                         }
                         catch {
                             if (!outputForTranslation)
-                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                                outputForTranslation = await driver.findElement(By.xpath(gSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
                         writeHtml(
@@ -137,7 +136,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                         break;
 
                     case 4:
-                        source = elementsToTranslate[ind];
+                        source = eleToTrans;
                         await inputForEnglish.clear();
                         await inputForEnglish.sendKeys(source.message);
                         e = new Date().getTime() + (10 * 1000);
@@ -148,7 +147,7 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
                         }
                         catch {
                             if (!outputForTranslation)
-                                outputForTranslation = await driver.findElement(By.xpath(genderSpecificXpath));
+                                outputForTranslation = await driver.findElement(By.xpath(gSpecificXpath));
                         }
                         target = await outputForTranslation.getText()
                         // target = `${target}`.replace(/ /g,'')
@@ -162,8 +161,8 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
 
         if (textType === 4) {
             writePlain(`\n < !--English - en-- >\n`);
-            for (let ind = 0; ind < elementsToTranslate.length; ind++) {
-                writePlain(`    "${elementsToTranslate[ind].literalId}": "${elementsToTranslate[ind].message}",\n`);
+            for (let eleToTran of elementsToTranslate) {
+                writePlain(`    "${eleToTran.literalId}": "${eleToTran.message}",\n`);
             }
         }
     }
@@ -173,19 +172,15 @@ exports.translate = (elementsToTranslate, textType, liveLink = '') => {
 
 
 function writePlain(text, file = 'output.txt') {
-    fs.appendFile(file, text, { 'flag': 'a' }, function (err) {
-        if (err) { return console.error(err); }
-    });
+    write(text, file);
 }
 
 function writeHtml(text, file = 'output.html') {
-    fs.appendFile(file, text, { 'flag': 'a' }, function (err) {
-        if (err) { return console.error(err); }
-    });
+    write(text, file);
 }
 
 function write(text, file) {
-    fs.appendFile(file, text, { 'flag': 'a' }, function (err) {
+    fs.appendFileSync(file, text, { 'flag': 'a' }, function (err) {
         if (err) { return console.error(err); }
     });
 }
